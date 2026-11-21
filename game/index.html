@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spot the Difference — Photo Detective</title>
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">🔍</span>
+    <span class="brand-name">Spot the Difference</span>
+    <span class="brand-sub">Photo Detective</span>
+  </div>
+  <div class="dots" id="level-dots" aria-label="Level progress"></div>
+  <div class="hud">
+    <div class="hud-item"><span class="hud-label">Score</span><span class="hud-value" id="score-value">0</span></div>
+    <div class="hud-item"><span class="hud-label">Found</span><span class="hud-value" id="found-value">0 / 5</span></div>
+    <div class="hud-item timer"><span class="hud-label">Time</span><span class="hud-value" id="timer-text">1:30</span></div>
+  </div>
+</header>
+
+<div class="timer-track" aria-hidden="true"><div class="timer-fill" id="timer-fill"></div></div>
+
+<main class="board-wrap">
+  <div class="level-line">
+    <div>
+      <h1 id="level-name">Pick a scene to start hunting</h1>
+      <p id="level-tagline">Three real photographs. Twenty-two things that changed. Find them all.</p>
+    </div>
+    <div class="actions">
+      <button id="hint-btn" type="button" class="btn">💡 Hint <span class="count" id="hint-count">3</span></button>
+      <button id="mute-btn" type="button" class="btn ghost" aria-pressed="false">🔊 Sound on</button>
+      <button id="back-title" type="button" class="btn ghost">Scenes</button>
+    </div>
+  </div>
+
+  <section class="board" aria-label="Spot the difference board">
+    <figure class="panel" id="panel-a">
+      <img src="assets/level1-a.jpg" alt="Original photograph — left side">
+      <figcaption><span class="tag">A · Original</span></figcaption>
+      <div class="marks" id="marks-a"></div>
+    </figure>
+    <div class="vs" aria-hidden="true">VS</div>
+    <figure class="panel" id="panel-b">
+      <img src="assets/level1-b.jpg" alt="Changed photograph — right side">
+      <figcaption><span class="tag">B · Changed</span></figcaption>
+      <div class="marks" id="marks-b"></div>
+    </figure>
+  </section>
+
+  <p class="status" id="status" role="status" aria-live="polite">Pick a scene to start hunting.</p>
+  <p class="keys">Click a difference on either picture · <kbd>H</kbd> hint · <kbd>M</kbd> sound · wrong clicks cost 25 points</p>
+</main>
+
+<div class="toast" id="toast" role="status"></div>
+
+<!-- Title / level select -->
+<div class="overlay" id="overlay-title">
+  <div class="sheet">
+    <p class="kicker">A photo detective game</p>
+    <h2>Spot the Difference</h2>
+    <p class="lede">Two photographs hang side by side. One of them has been tampered
+    with. Find every change before the clock runs out — no two levels hide the
+    same tricks.</p>
+    <div class="level-cards" id="level-cards"></div>
+    <button id="title-howto" type="button" class="btn ghost">How to play</button>
+    <div class="howto hidden" id="howto">
+      <p><strong>Click</strong> a difference on either picture — the ring lands on
+      both. A correct find scores <strong>100 points</strong>, plus a streak bonus.
+      A wrong click costs <strong>25 points</strong>.</p>
+      <p><strong>Hints</strong> (3 per level) pulse one difference you missed and
+      cost 50 points. Clearing a level banks <strong>5 points per second</strong>
+      left on the clock.</p>
+      <p>Keyboard: <kbd>H</kbd> hint · <kbd>M</kbd> sound · <kbd>R</kbd> retry after
+      a time-out.</p>
+    </div>
+    <p class="credits">Photographs: Pexels (free licence) · Sounds: synthesized in your browser · Plays fully offline</p>
+  </div>
+</div>
+
+<!-- Level cleared -->
+<div class="overlay hidden" id="overlay-level">
+  <div class="sheet narrow">
+    <p class="kicker">Level cleared</p>
+    <h2 id="leveldone-title">Kitchen Counter cleared!</h2>
+    <div class="stat-lines" id="leveldone-lines"></div>
+    <button id="leveldone-next" type="button" class="btn primary">Next level →</button>
+  </div>
+</div>
+
+<!-- Game complete -->
+<div class="overlay hidden" id="overlay-end">
+  <div class="sheet narrow">
+    <p class="kicker">Case closed</p>
+    <h2>All three scenes cleared!</h2>
+    <p class="big-score"><span id="end-score">0</span><span class="big-label">points</span></p>
+    <div class="stat-lines" id="end-lines"></div>
+    <button id="end-replay" type="button" class="btn primary">Play again</button>
+  </div>
+</div>
+
+<!-- Out of time -->
+<div class="overlay hidden" id="overlay-fail">
+  <div class="sheet narrow">
+    <p class="kicker">Out of time</p>
+    <h2>The trail went cold</h2>
+    <p class="lede" id="fail-lines"></p>
+    <button id="fail-retry" type="button" class="btn primary">Retry this level</button>
+  </div>
+</div>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
